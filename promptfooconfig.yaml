@@ -1,0 +1,11 @@
+prompts:
+  - "{{quest}}"
+
+
+providers:
+  - id: groq:llama-3.3-70b-versatile
+  - id: groq:openai/gpt-oss-120b
+  - id: groq:qwen/qwen3-32b
+
+
+tests: "file://promptshypotheticaldistancing.csv"
