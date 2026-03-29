@@ -1,7 +1,7 @@
-# TextAttack-JailEval
+# ProjectTextAttack
 ### Evaluating LLM Robustness Against Jailbreak Attacks — A TextAttack-Inspired Benchmark Extension
 
-> **ECE** Bachelor 2 2026 <br>
+> **ECE** Bachelor 2 2026<br>
 > **Authors:** Philippe PENG, Rémi PAILLAUD-IWABUCHI, Kévin NGUYEN, Tatiana BLISAC  
 > **Supervisors:** M. FORNIER Yann, M. VANDAMME Simon
 
@@ -62,7 +62,7 @@ This project evaluates the robustness of Large Language Models (LLMs) against ad
 | Model | ASR (%) | Persona Adoption Rate (%) | Hallucination Rate (%) |
 |---|---|---|---|
 | llama-3.3-70b | **70.0%** | **20.0%** | **3.6%** |
-| qwen3-32b | **58.6%** | **15.7%** | **2.9%** |
+| qwen3-32b | **58.6%** | **15.7%** | **2.9%**% |
 | gpt-oss-120b | **5.0%** | **0.7%** | **0.7%** |
 
 > ASR = Attack Success Rate is the proportion of prompts that successfully bypassed the model's safety guidelines.  
@@ -124,6 +124,7 @@ ProjectTextAttack/
 │   ├── merge_annotated.py               # Merges per-technique annotated CSVs
 │   ├── organize_results.py              # Converts wide promptfoo output to long format
 │   ├── clean.py                         # Removes unnecessary promptfoo columns
+│   ├── analysis_language_switching.py   
 │   └── analysis.py                      # Computes all metrics and generates figures
 │
 ├── promptfooconfig.yaml                 # promptfoo evaluation configuration
@@ -136,6 +137,11 @@ ProjectTextAttack/
 │   ├── 05_refusal_type_distribution.png
 │   ├── 06_justification_quality_by_model.png
 │   └── 07_hallucination_rate.png
+│
+├── figures_ls/
+│   ├── ls_01_asr_by_language_model.png
+│   ├── ls_02_mean_asr_by_language.png
+│   └── ls_03_persona_adoption_by_language.png
 │
 ```
 ---
