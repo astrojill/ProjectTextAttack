@@ -1,7 +1,7 @@
 # ProjectTextAttack
 ### Evaluating LLM Robustness Against Jailbreak Attacks — A TextAttack-Inspired Benchmark Extension
 
-> **ECE** · [Bachelor 2] · [2026]  
+> **ECE** · [Bachelor 2] [2026]  
 > **Authors:** [Philippe PENG], [Rémi PAILLAUD-IWABUCHI], [Kévin NGUYEN], [Tatiana BLISAC]  
 > **Supervisors:** [M. FORNIER Yann, M. VANDAMME Simon]
 
