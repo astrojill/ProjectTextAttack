@@ -1,0 +1,4 @@
+model,total_prompts,successful_attacks,asr_pct,persona_adoption_rate_pct,full_persona_adoption_pct,hallucination_rate_pct,mean_justification_quality,direct_refusal_pct,partial_refusal_pct,evasive_refusal_pct
+gpt-oss-120b,140,7,5.0,0.7,0.0,0.7,1.0,92.5,0.0,0.0
+llama-3.3-70b,140,98,70.0,20.0,4.3,3.6,1.05,66.7,9.5,21.4
+qwen3-32b,140,82,58.6,15.7,5.7,2.9,1.83,63.8,10.3,22.4
