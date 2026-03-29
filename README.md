@@ -1,4 +1,4 @@
-# ProjectTextAttack
+# TextAttack-JailEval
 ### Evaluating LLM Robustness Against Jailbreak Attacks — A TextAttack-Inspired Benchmark Extension
 
 > **ECE** Bachelor 2 2026<br>
