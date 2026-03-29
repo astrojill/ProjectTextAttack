@@ -1,9 +1,9 @@
 # ProjectTextAttack
 ### Evaluating LLM Robustness Against Jailbreak Attacks — A TextAttack-Inspired Benchmark Extension
 
-> **ECE** [Bachelor 2] [2026]  
-> **Authors:** [Philippe PENG], [Rémi PAILLAUD-IWABUCHI], [Kévin NGUYEN], [Tatiana BLISAC]  
-> **Supervisors:** [M. FORNIER Yann, M. VANDAMME Simon]
+> **ECE** Bachelor 2 2026 
+> **Authors:** Philippe PENG, Rémi PAILLAUD-IWABUCHI, Kévin NGUYEN, Tatiana BLISAC  
+> **Supervisors:** M. FORNIER Yann, M. VANDAMME Simon
 
 ---
 
@@ -24,8 +24,8 @@ This project evaluates the robustness of Large Language Models (LLMs) against ad
 - **Limitation identified:** TextAttack was designed for NLP classification tasks and provides no corpus or evaluation pipeline for generative LLM jailbreak testing
 
 ### Experimental corpus (our contribution)
-- **Size:** 141 prompts
-- **Format:** JSON with full metadata per entry (`id`, `technique`, `quest`)
+- **Size:** 141 prompts divided in 11 categories
+- **Format:** CSV with full metadata per entry (`id`, `technique`, `quest`)
 - **Construction:** Manually authored prompts organised along jailbreaks attack techniques
 - **Location:** `prompts/`
 
@@ -66,7 +66,7 @@ This project evaluates the robustness of Large Language Models (LLMs) against ad
 | gpt-oss-120b | **5.0%** | **0.7%** | **0.7%** |
 
 > ASR = Attack Success Rate is the proportion of prompts that successfully bypassed the model's safety guidelines.  
-> Full results and per-technique breakdown: see the scientific report PDF.
+> Full results and per technique breakdown: see the scientific report PDF.
 
 ---
 
@@ -76,7 +76,6 @@ This project evaluates the robustness of Large Language Models (LLMs) against ad
 ProjectTextAttack/
 │
 ├── README.md
-├── requirements.txt
 │
 ├── prompts/
 │   ├── promptsacademicframing.csv
@@ -138,40 +137,35 @@ ProjectTextAttack/
 │   ├── 06_justification_quality_by_model.png
 │   └── 07_hallucination_rate.png
 │
-├── docs/
-│   └── annotation_grid.md               # Scoring criteria documentation
-│
 ```
 ---
 
-## How to Reproduce
+## How to Reproduce (Make sure to have Docker installed on your machine)
 
-### 1. Install dependencies
+### 1. Install promptfoo
 ```bash
-pip install -r requirements.txt
+docker run --rm -v ${PWD}:/app -it ghcr.io/promptfoo/promptfoo init
 ```
 
-### 2. Configure your Groq API key
-```bash
-export GROQ_API_KEY=your_key_here
-```
+### 2. Configure your Groq API key at https://console.groq.com/keys
 
 ### 3. Run the evaluation with promptfoo (Docker)
 ```bash
-docker run --rm \
-  -v ${PWD}:/app/data \
-  -v ${PWD}/.promptfoo:/home/promptfoo/.promptfoo \
-  -p 3000:3000 \
-  -e GROQ_API_KEY=$GROQ_API_KEY \
-  --entrypoint /bin/sh \
-  ghcr.io/promptfoo/promptfoo \
-  -c "npx promptfoo eval --config /app/data/promptfoo/promptfooconfig.yaml --output /app/data/results/raw_outputs/results_[technique].csv"
+docker run --rm 
+-v ${PWD}:/app/data 
+-v ${PWD}/.promptfoo:/home/promptfoo/.promptfoo 
+-p 3000:3000 
+-e GROQ_API_KEY=[CHANGEME] 
+--entrypoint /bin/sh ghcr.io/promptfoo/promptfoo 
+-c "npx promptfoo eval --config /app/data/promptfooconfig.yaml 
+--output /app/data/results.csv 
+--description '[CHANGEME]' && npx promptfoo view --port 3000 --yes"
 ```
 
 ### 4. Clean and reshape raw outputs
 ```bash
 python scripts/clean.py
-python scripts/reshape_results.py
+python scripts/organize_results.py
 ```
 
 ### 5. Annotate responses
@@ -182,7 +176,7 @@ Open each file in `results/annotated/` and fill in the 5 annotation columns per 
 - `persona_adoption` (0 / 1 / 2)
 - `hallucination` (0/1)
 
-See `docs/annotation_grid.md` for detailed scoring criteria.
+See Scientific Report for detailed scoring criteria.
 
 ### 6. Merge annotated files
 ```bash
@@ -194,7 +188,7 @@ python scripts/merge_annotated.py
 python scripts/analysis.py
 ```
 
-Results saved to `results/processed_results.csv` and `results/figures/`.
+Results saved to `/final_results/results_all.csv`, `/final_results/summary_metrics.csv` and `figures/`.
 
 ---
 
@@ -208,6 +202,7 @@ Results saved to `results/processed_results.csv` and `results/figures/`.
 | `persona_adoption` | 0 / 1 / 2 | Did the model adopt the adversarial persona? |
 | `hallucination` | 0 / 1 | Did the model fabricate false information? |
 
+> Annotation Grid Full Details: see the scientific report PDF.
 ---
 
 ## Credits
